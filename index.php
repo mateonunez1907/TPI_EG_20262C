@@ -29,11 +29,13 @@ date_default_timezone_set("America/Argentina/Cordoba");
              aria-label="Navegación principal">
 
             <div class="container d-flex flex-wrap gap-3">
+
                 <a class="navbar-brand fw-bold" href="index.php">
                     ViajAR
                 </a>
 
                 <ul class="navbar-nav flex-row gap-3">
+
                     <li class="nav-item">
                         <a class="nav-link active"
                            href="index.php"
@@ -43,10 +45,17 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link text-white" href="vuelos.php">
+                            Vuelos
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="#sobre-viajar">
                             Sobre ViajAR
                         </a>
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -58,6 +67,7 @@ date_default_timezone_set("America/Argentina/Cordoba");
                  aria-labelledby="titulo-principal">
 
             <div class="container">
+
                 <h1 id="titulo-principal" class="text-primary">
                     Tu próximo viaje comienza en ViajAR
                 </h1>
@@ -66,9 +76,10 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     Una plataforma para buscar vuelos y organizar tus viajes.
                 </p>
 
-                <a href="#sobre-viajar" class="btn btn-primary">
-                    Conocer ViajAR
+                <a href="vuelos.php" class="btn btn-primary">
+                    Ver vuelos disponibles
                 </a>
+
             </div>
         </section>
 
@@ -88,25 +99,35 @@ date_default_timezone_set("America/Argentina/Cordoba");
                 Buscamos ofrecer una experiencia sencilla,
                 con información clara para organizar cada viaje.
             </p>
+
         </section>
 
     </main>
 
     <footer class="bg-light border-top py-4">
+
         <div class="container">
 
             <nav aria-label="Mapa del sitio">
+
                 <h2 class="h6">Mapa del sitio</h2>
 
                 <ul class="list-unstyled">
+
                     <li>
                         <a href="index.php">Inicio</a>
                     </li>
 
                     <li>
+                        <a href="vuelos.php">Vuelos</a>
+                    </li>
+
+                    <li>
                         <a href="#sobre-viajar">Sobre ViajAR</a>
                     </li>
+
                 </ul>
+
             </nav>
 
             <p class="mb-0">
@@ -114,6 +135,7 @@ date_default_timezone_set("America/Argentina/Cordoba");
             </p>
 
         </div>
+
     </footer>
 
 </body>
