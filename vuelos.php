@@ -16,6 +16,21 @@ $errores = [];
 $consulta = null;
 $vuelos = null;
 
+// Mostramos dos vuelos por página para probar con los tres ejemplos.
+$vuelosPorPagina = 2;
+$totalVuelos = 0;
+$totalPaginas = 1;
+
+$pagina = filter_var(
+    $_GET["pagina"] ?? "1",
+    FILTER_VALIDATE_INT,
+    ["options" => ["min_range" => 1]]
+);
+
+if ($pagina === false) {
+    $pagina = 1;
+}
+
 $hoy = date("Y-m-d");
 $manana = date("Y-m-d", strtotime("+1 day"));
 
@@ -75,27 +90,25 @@ if (empty($errores)) {
     $origenBusqueda = "%" . $origen . "%";
     $destinoBusqueda = "%" . $destino . "%";
 
-    $sql = "SELECT v.codVuelo, v.origenVuelo, v.destinoVuelo,
-                   v.fechaSalidaVuelo, v.horaSalidaVuelo,
-                   v.precioVuelo, v.asientosDisponibles,
-                   a.nombreAerolinea
-            FROM vuelos AS v
-            INNER JOIN aerolineas AS a
-                ON v.codAerolinea = a.codAerolinea
-            WHERE v.activo = 1
-              AND a.activo = 1
-              AND v.fechaSalidaVuelo > ?
-              AND v.origenVuelo LIKE ?
-              AND v.destinoVuelo LIKE ?
-              AND (? = '' OR v.fechaSalidaVuelo = ?)
-              AND v.asientosDisponibles >= ?
-            ORDER BY v.fechaSalidaVuelo, v.horaSalidaVuelo, v.codVuelo";
+    // Usamos los mismos filtros para contar y para listar.
+    $filtrosSql = " FROM vuelos AS v
+                    INNER JOIN aerolineas AS a
+                        ON v.codAerolinea = a.codAerolinea
+                    WHERE v.activo = 1
+                      AND a.activo = 1
+                      AND v.fechaSalidaVuelo > ?
+                      AND v.origenVuelo LIKE ?
+                      AND v.destinoVuelo LIKE ?
+                      AND (? = '' OR v.fechaSalidaVuelo = ?)
+                      AND v.asientosDisponibles >= ?";
 
     try {
-        $consulta = mysqli_prepare($conexion, $sql);
+        // Primero contamos todos los vuelos que coinciden.
+        $sqlTotal = "SELECT COUNT(*) AS total" . $filtrosSql;
+        $consultaTotal = mysqli_prepare($conexion, $sqlTotal);
 
         mysqli_stmt_bind_param(
-            $consulta,
+            $consultaTotal,
             "sssssi",
             $hoy,
             $origenBusqueda,
@@ -105,8 +118,56 @@ if (empty($errores)) {
             $pasajeros
         );
 
+        mysqli_stmt_execute($consultaTotal);
+        $resultadoTotal = mysqli_stmt_get_result($consultaTotal);
+        $filaTotal = mysqli_fetch_assoc($resultadoTotal);
+        $totalVuelos = (int) $filaTotal["total"];
+
+        mysqli_stmt_close($consultaTotal);
+
+        // Redondeamos hacia arriba para calcular la cantidad de páginas.
+        $totalPaginas = max(1, (int) ceil($totalVuelos / $vuelosPorPagina));
+
+        if ($pagina > $totalPaginas) {
+            $pagina = $totalPaginas;
+        }
+
+        $desplazamiento = ($pagina - 1) * $vuelosPorPagina;
+
+        // LIMIT indica cuántos traer y OFFSET cuántos saltear.
+        $sql = "SELECT v.codVuelo, v.origenVuelo, v.destinoVuelo,
+                       v.fechaSalidaVuelo, v.horaSalidaVuelo,
+                       v.precioVuelo, v.asientosDisponibles,
+                       a.nombreAerolinea"
+               . $filtrosSql .
+               " ORDER BY v.fechaSalidaVuelo, v.horaSalidaVuelo, v.codVuelo
+                 LIMIT ? OFFSET ?";
+
+        $consulta = mysqli_prepare($conexion, $sql);
+
+        mysqli_stmt_bind_param(
+            $consulta,
+            "sssssiii",
+            $hoy,
+            $origenBusqueda,
+            $destinoBusqueda,
+            $fecha,
+            $fecha,
+            $pasajeros,
+            $vuelosPorPagina,
+            $desplazamiento
+        );
+
         mysqli_stmt_execute($consulta);
         $vuelos = mysqli_stmt_get_result($consulta);
+
+        // Armamos los enlaces conservando los filtros de búsqueda.
+        $enlaceBase = "vuelos.php?" . http_build_query([
+            "origen" => $origen,
+            "destino" => $destino,
+            "fecha" => $fecha,
+            "pasajeros" => $pasajeros
+        ]) . "&pagina=";
 
     } catch (mysqli_sql_exception $error) {
         error_log($error->getMessage());
@@ -248,13 +309,23 @@ if (empty($errores)) {
                 </p>
             <?php else: ?>
                 <p>
+                    Mostrando
+                    <?php echo $desplazamiento + 1; ?>
+                    a
+                    <?php echo min($desplazamiento + $vuelosPorPagina, $totalVuelos); ?>
+                    de
+                    <?php echo $totalVuelos; ?> vuelos.
+                    Página <?php echo $pagina; ?> de <?php echo $totalPaginas; ?>.
+                </p>
+
+                <p>
                     Cantidad de pasajeros de la búsqueda:
                     <strong><?php echo (int) $pasajeros; ?></strong>.
                 </p>
 
                 <div class="row g-4">
                     <?php while ($vuelo = mysqli_fetch_assoc($vuelos)): ?>
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6">
                             <article class="card h-100">
                                 <div class="card-body">
                                     <h3 class="h5">
@@ -288,6 +359,47 @@ if (empty($errores)) {
                         </div>
                     <?php endwhile; ?>
                 </div>
+
+                <?php if ($totalPaginas > 1): ?>
+                    <nav class="mt-4" aria-label="Páginas de resultados">
+                        <ul class="pagination justify-content-center">
+
+                            <?php if ($pagina > 1): ?>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="<?php echo textoSeguro($enlaceBase . ($pagina - 1)); ?>">
+                                        Anterior
+                                    </a>
+                                </li>
+                            <?php else: ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">Anterior</span>
+                                </li>
+                            <?php endif; ?>
+
+                            <li class="page-item active">
+                                <span class="page-link" aria-current="page">
+                                    <?php echo $pagina; ?> de <?php echo $totalPaginas; ?>
+                                </span>
+                            </li>
+
+                            <?php if ($pagina < $totalPaginas): ?>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="<?php echo textoSeguro($enlaceBase . ($pagina + 1)); ?>">
+                                        Siguiente
+                                    </a>
+                                </li>
+                            <?php else: ?>
+                                <li class="page-item disabled">
+                                    <span class="page-link">Siguiente</span>
+                                </li>
+                            <?php endif; ?>
+
+                        </ul>
+                    </nav>
+                <?php endif; ?>
+
             <?php endif; ?>
         <?php endif; ?>
 
