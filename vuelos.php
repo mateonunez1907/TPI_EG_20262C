@@ -6,30 +6,113 @@ function textoSeguro($texto) {
     return htmlspecialchars($texto, ENT_QUOTES, "UTF-8");
 }
 
+// Leemos los filtros. Si no se enviaron, usamos valores iniciales.
+$origen = $_GET["origen"] ?? "";
+$destino = $_GET["destino"] ?? "";
+$fecha = $_GET["fecha"] ?? "";
+$pasajerosTexto = $_GET["pasajeros"] ?? "1";
+
+$errores = [];
+$consulta = null;
+$vuelos = null;
+
 $hoy = date("Y-m-d");
+$manana = date("Y-m-d", strtotime("+1 day"));
 
-$sql = "SELECT v.codVuelo, v.origenVuelo, v.destinoVuelo,
-               v.fechaSalidaVuelo, v.horaSalidaVuelo,
-               v.precioVuelo, v.asientosDisponibles,
-               a.nombreAerolinea
-        FROM vuelos AS v
-        INNER JOIN aerolineas AS a
-            ON v.codAerolinea = a.codAerolinea
-        WHERE v.activo = 1
-          AND a.activo = 1
-          AND v.asientosDisponibles > 0
-          AND v.fechaSalidaVuelo > ?
-        ORDER BY v.fechaSalidaVuelo, v.horaSalidaVuelo, v.codVuelo";
+// Evitamos recibir listas donde esperamos un único valor.
+if (!is_string($origen) || !is_string($destino)
+    || !is_string($fecha) || !is_string($pasajerosTexto)) {
+    $errores[] = "Los datos de la búsqueda no son válidos.";
+    $origen = "";
+    $destino = "";
+    $fecha = "";
+    $pasajerosTexto = "1";
+}
 
-try {
-    $consulta = mysqli_prepare($conexion, $sql);
-    mysqli_stmt_bind_param($consulta, "s", $hoy);
-    mysqli_stmt_execute($consulta);
-    $vuelos = mysqli_stmt_get_result($consulta);
-} catch (mysqli_sql_exception $error) {
-    error_log($error->getMessage());
-    http_response_code(500);
-    exit("No se pudieron consultar los vuelos.");
+$origen = trim($origen);
+$destino = trim($destino);
+$fecha = trim($fecha);
+$pasajerosTexto = trim($pasajerosTexto);
+
+if (mb_strlen($origen) > 100 || mb_strlen($destino) > 100) {
+    $errores[] = "El origen y el destino pueden tener hasta 100 caracteres.";
+}
+
+// Validamos la cantidad también en PHP.
+$pasajeros = filter_var(
+    $pasajerosTexto,
+    FILTER_VALIDATE_INT,
+    ["options" => ["min_range" => 1, "max_range" => 10]]
+);
+
+if ($pasajeros === false) {
+    $errores[] = "La cantidad de pasajeros debe ser un número entero entre 1 y 10.";
+}
+
+// La fecha es opcional, pero debe ser real y posterior a hoy.
+if ($fecha !== "") {
+    $fechaValida = false;
+
+    if (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', $fecha)) {
+        $partesFecha = explode("-", $fecha);
+
+        $fechaValida = checkdate(
+            (int) $partesFecha[1],
+            (int) $partesFecha[2],
+            (int) $partesFecha[0]
+        );
+    }
+
+    if (!$fechaValida) {
+        $errores[] = "Ingresá una fecha válida.";
+    } elseif ($fecha <= $hoy) {
+        $errores[] = "La fecha de salida debe ser posterior al día de hoy.";
+    }
+}
+
+// Consultamos solo cuando los filtros son válidos.
+if (empty($errores)) {
+    $origenBusqueda = "%" . $origen . "%";
+    $destinoBusqueda = "%" . $destino . "%";
+
+    $sql = "SELECT v.codVuelo, v.origenVuelo, v.destinoVuelo,
+                   v.fechaSalidaVuelo, v.horaSalidaVuelo,
+                   v.precioVuelo, v.asientosDisponibles,
+                   a.nombreAerolinea
+            FROM vuelos AS v
+            INNER JOIN aerolineas AS a
+                ON v.codAerolinea = a.codAerolinea
+            WHERE v.activo = 1
+              AND a.activo = 1
+              AND v.fechaSalidaVuelo > ?
+              AND v.origenVuelo LIKE ?
+              AND v.destinoVuelo LIKE ?
+              AND (? = '' OR v.fechaSalidaVuelo = ?)
+              AND v.asientosDisponibles >= ?
+            ORDER BY v.fechaSalidaVuelo, v.horaSalidaVuelo, v.codVuelo";
+
+    try {
+        $consulta = mysqli_prepare($conexion, $sql);
+
+        mysqli_stmt_bind_param(
+            $consulta,
+            "sssssi",
+            $hoy,
+            $origenBusqueda,
+            $destinoBusqueda,
+            $fecha,
+            $fecha,
+            $pasajeros
+        );
+
+        mysqli_stmt_execute($consulta);
+        $vuelos = mysqli_stmt_get_result($consulta);
+
+    } catch (mysqli_sql_exception $error) {
+        error_log($error->getMessage());
+        http_response_code(500);
+        exit("No se pudieron consultar los vuelos.");
+    }
 }
 ?>
 
@@ -38,7 +121,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViajAR - Vuelos disponibles</title>
+    <title>ViajAR - Buscar vuelos</title>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -62,23 +145,15 @@ try {
 
                 <ul class="navbar-nav flex-row gap-3">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php">
-                            Inicio
-                        </a>
+                        <a class="nav-link text-white" href="index.php">Inicio</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link active" href="vuelos.php"
-                           aria-current="page">
-                            Vuelos
-                        </a>
+                           aria-current="page">Vuelos</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link text-white"
-                           href="index.php#sobre-viajar">
-                            Sobre ViajAR
-                        </a>
+                           href="index.php#sobre-viajar">Sobre ViajAR</a>
                     </li>
                 </ul>
             </div>
@@ -92,63 +167,128 @@ try {
                 <li class="breadcrumb-item">
                     <a href="index.php">Inicio</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    Vuelos
-                </li>
+                <li class="breadcrumb-item active" aria-current="page">Vuelos</li>
             </ol>
         </nav>
 
-        <h1>Vuelos disponibles</h1>
+        <h1>Buscar vuelos</h1>
         <p>
-            Consultá las próximas salidas y los precios por pasajero
-            en pesos argentinos.
+            Podés completar solo los filtros que necesites.
+            Los precios son por pasajero y están expresados en pesos argentinos.
         </p>
 
-        <?php if (mysqli_num_rows($vuelos) === 0): ?>
-            <p class="alert alert-info">
-                No hay vuelos disponibles por el momento.
-            </p>
-        <?php else: ?>
-            <div class="row g-4">
-
-                <?php while ($vuelo = mysqli_fetch_assoc($vuelos)): ?>
-                    <div class="col-md-6 col-lg-4">
-                        <article class="card h-100">
-                            <div class="card-body">
-
-                                <h2 class="h5">
-                                    <?php echo textoSeguro($vuelo["origenVuelo"]); ?>
-                                    →
-                                    <?php echo textoSeguro($vuelo["destinoVuelo"]); ?>
-                                </h2>
-
-                                <p>
-                                    <?php echo textoSeguro($vuelo["nombreAerolinea"]); ?>
-                                </p>
-
-                                <p class="mb-1">
-                                    <strong>Salida:</strong>
-                                    <?php echo date("d/m/Y", strtotime($vuelo["fechaSalidaVuelo"])); ?>
-                                    a las
-                                    <?php echo textoSeguro(substr($vuelo["horaSalidaVuelo"], 0, 5)); ?>
-                                </p>
-
-                                <p class="mb-1">
-                                    <strong>Precio por pasajero:</strong>
-                                    $ <?php echo number_format((float) $vuelo["precioVuelo"], 2, ",", "."); ?>
-                                </p>
-
-                                <p class="mb-0">
-                                    <strong>Asientos disponibles:</strong>
-                                    <?php echo (int) $vuelo["asientosDisponibles"]; ?>
-                                </p>
-
-                            </div>
-                        </article>
-                    </div>
-                <?php endwhile; ?>
-
+        <?php if (!empty($errores)): ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Revisá los siguientes datos:</p>
+                <ul class="mb-0">
+                    <?php foreach ($errores as $error): ?>
+                        <li><?php echo textoSeguro($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
+        <?php endif; ?>
+
+        <form action="vuelos.php" method="get"
+              class="border rounded p-4 mb-4" aria-label="Buscar vuelos">
+
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="origen" class="form-label">Origen</label>
+                    <input type="text" id="origen" name="origen"
+                           class="form-control" maxlength="100"
+                           placeholder="Ej.: Rosario"
+                           value="<?php echo textoSeguro($origen); ?>">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="destino" class="form-label">Destino</label>
+                    <input type="text" id="destino" name="destino"
+                           class="form-control" maxlength="100"
+                           placeholder="Ej.: Buenos Aires"
+                           value="<?php echo textoSeguro($destino); ?>">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="fecha" class="form-label">Fecha de salida</label>
+                    <input type="date" id="fecha" name="fecha"
+                           class="form-control"
+                           min="<?php echo textoSeguro($manana); ?>"
+                           value="<?php echo textoSeguro($fecha); ?>">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="pasajeros" class="form-label">Pasajeros</label>
+                    <input type="number" id="pasajeros" name="pasajeros"
+                           class="form-control" min="1" max="10" step="1"
+                           required
+                           value="<?php echo textoSeguro($pasajerosTexto); ?>">
+                </div>
+            </div>
+
+            <p class="form-text mt-3">
+                La fecha de salida debe ser posterior a hoy.
+                Podés buscar entre 1 y 10 pasajeros.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary">Buscar vuelos</button>
+                <a href="vuelos.php" class="btn btn-outline-secondary">
+                    Limpiar búsqueda
+                </a>
+            </div>
+        </form>
+
+        <?php if (empty($errores)): ?>
+            <h2 class="h4">Vuelos disponibles</h2>
+
+            <?php if (mysqli_num_rows($vuelos) === 0): ?>
+                <p class="alert alert-info">
+                    No hay vuelos disponibles para los filtros seleccionados.
+                    Probá con otros datos o limpiá la búsqueda.
+                </p>
+            <?php else: ?>
+                <p>
+                    Cantidad de pasajeros de la búsqueda:
+                    <strong><?php echo (int) $pasajeros; ?></strong>.
+                </p>
+
+                <div class="row g-4">
+                    <?php while ($vuelo = mysqli_fetch_assoc($vuelos)): ?>
+                        <div class="col-md-6 col-lg-4">
+                            <article class="card h-100">
+                                <div class="card-body">
+                                    <h3 class="h5">
+                                        <?php echo textoSeguro($vuelo["origenVuelo"]); ?>
+                                        →
+                                        <?php echo textoSeguro($vuelo["destinoVuelo"]); ?>
+                                    </h3>
+
+                                    <p>
+                                        <?php echo textoSeguro($vuelo["nombreAerolinea"]); ?>
+                                    </p>
+
+                                    <p class="mb-1">
+                                        <strong>Salida:</strong>
+                                        <?php echo date("d/m/Y", strtotime($vuelo["fechaSalidaVuelo"])); ?>
+                                        a las
+                                        <?php echo textoSeguro(substr($vuelo["horaSalidaVuelo"], 0, 5)); ?>
+                                    </p>
+
+                                    <p class="mb-1">
+                                        <strong>Precio por pasajero:</strong>
+                                        $ <?php echo number_format((float) $vuelo["precioVuelo"], 2, ",", "."); ?>
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <strong>Asientos disponibles:</strong>
+                                        <?php echo (int) $vuelo["asientosDisponibles"]; ?>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
 
     </main>
@@ -157,19 +297,14 @@ try {
         <div class="container">
             <nav aria-label="Mapa del sitio">
                 <h2 class="h6">Mapa del sitio</h2>
-
                 <ul class="list-unstyled">
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="vuelos.php">Vuelos</a></li>
-                    <li>
-                        <a href="index.php#sobre-viajar">Sobre ViajAR</a>
-                    </li>
+                    <li><a href="index.php#sobre-viajar">Sobre ViajAR</a></li>
                 </ul>
             </nav>
 
-            <p class="mb-0">
-                &copy; <?php echo date("Y"); ?> ViajAR
-            </p>
+            <p class="mb-0">&copy; <?php echo date("Y"); ?> ViajAR</p>
         </div>
     </footer>
 
@@ -177,5 +312,8 @@ try {
 </html>
 
 <?php
-mysqli_stmt_close($consulta);
+if ($consulta !== null) {
+    mysqli_stmt_close($consulta);
+}
+
 mysqli_close($conexion);
