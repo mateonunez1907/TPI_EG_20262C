@@ -325,6 +325,14 @@ if (empty($errores)) {
 
                 <div class="row g-4">
                     <?php while ($vuelo = mysqli_fetch_assoc($vuelos)): ?>
+                        <?php
+                        $enlaceDetalle = "detalle_vuelo.php?" . http_build_query([
+                            "codVuelo" => (int) $vuelo["codVuelo"],
+                            "pasajeros" => $pasajeros,
+                            "volver" => $enlaceBase . $pagina
+                        ]);
+                        ?>
+
                         <div class="col-md-6">
                             <article class="card h-100">
                                 <div class="card-body">
@@ -354,6 +362,11 @@ if (empty($errores)) {
                                         <strong>Asientos disponibles:</strong>
                                         <?php echo (int) $vuelo["asientosDisponibles"]; ?>
                                     </p>
+
+                                    <a class="btn btn-primary mt-3"
+                                       href="<?php echo textoSeguro($enlaceDetalle); ?>">
+                                        Ver detalle
+                                    </a>
                                 </div>
                             </article>
                         </div>

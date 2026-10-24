@@ -33,7 +33,8 @@ Bootstrap se carga mediante internet.
 ## Archivos principales
 
 - index.php: página de inicio.
-- vuelos.php: listado de vuelos disponibles.
+- vuelos.php: buscador y listado paginado de vuelos.
+- detalle_vuelo.php: información y tarifa del vuelo seleccionado.
 - conexion.php: conexión con MySQL.
 - config/ejemplo.php: configuración de conexión de ejemplo.
 - config/local.php: configuración local, excluida de Git.
@@ -53,7 +54,27 @@ Bootstrap se carga mediante internet.
 - Listado de vuelos obtenido desde la base de datos.
 - Visualización de recorrido, aerolínea, fecha, horario,
   precio por pasajero y asientos disponibles.
-- Mensaje cuando no existen vuelos disponibles.
+- Búsqueda por origen, destino, fecha y cantidad de pasajeros.
+- Coincidencias parciales para los nombres de las ciudades.
+- Validación del formulario en el navegador y en PHP.
+- Conservación de los filtros y opción para limpiar la búsqueda.
+- Mensaje cuando no existen vuelos para los filtros seleccionados.
+- Paginación con dos vuelos por página.
+- Botones para avanzar y retroceder conservando los filtros.
+- Indicador de página actual y cantidad total de resultados.
+- Control de números de página inválidos o fuera de rango.
+- Página de detalle de cada vuelo.
+- Cálculo de la tarifa publicada por la cantidad de pasajeros.
+- Comprobación de disponibilidad al consultar el detalle.
+- Regreso a los resultados conservando los filtros y la página.
+- Mensajes para códigos inválidos y vuelos no disponibles.
 
-El listado muestra vuelos activos de aerolíneas activas,
-con asientos disponibles y fecha de salida posterior al día actual.
+El listado y el detalle muestran vuelos activos de aerolíneas
+activas, con fecha de salida posterior al día actual y asientos
+suficientes para la cantidad solicitada.
+
+La cantidad de pasajeros debe ser un número entero entre 1 y 10.
+Los filtros de origen, destino y fecha son opcionales.
+
+El importe del detalle se calcula con la tarifa publicada.
+La aplicación de promociones se incorporará en un avance posterior.
