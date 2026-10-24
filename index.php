@@ -1,5 +1,7 @@
 <?php
+
 date_default_timezone_set("America/Argentina/Cordoba");
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,7 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     ViajAR
                 </a>
 
-                <ul class="navbar-nav flex-row gap-3">
+                <ul class="navbar-nav flex-row flex-wrap gap-3">
 
                     <li class="nav-item">
                         <a class="nav-link active"
@@ -51,12 +53,19 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link text-white" href="registro.php">
+                            Crear cuenta
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="#sobre-viajar">
                             Sobre ViajAR
                         </a>
                     </li>
 
                 </ul>
+
             </div>
         </nav>
     </header>
@@ -78,6 +87,10 @@ date_default_timezone_set("America/Argentina/Cordoba");
 
                 <a href="vuelos.php" class="btn btn-primary">
                     Ver vuelos disponibles
+                </a>
+
+                <a href="registro.php" class="btn btn-outline-primary">
+                    Crear cuenta
                 </a>
 
             </div>
@@ -120,6 +133,10 @@ date_default_timezone_set("America/Argentina/Cordoba");
 
                     <li>
                         <a href="vuelos.php">Vuelos</a>
+                    </li>
+
+                    <li>
+                        <a href="registro.php">Crear cuenta</a>
                     </li>
 
                     <li>

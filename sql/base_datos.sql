@@ -23,3 +23,19 @@ CREATE TABLE IF NOT EXISTS vuelos (
   activo TINYINT(1) NOT NULL DEFAULT 1,
   FOREIGN KEY (codAerolinea) REFERENCES aerolineas(codAerolinea)
 ) ENGINE = InnoDB;
+-- Cuentas de usuarios de la plataforma.
+CREATE TABLE IF NOT EXISTS usuarios (
+  codUsuario INT AUTO_INCREMENT PRIMARY KEY,
+  nombreUsuario VARCHAR(100) NOT NULL,
+  mailUsuario VARCHAR(254) NOT NULL UNIQUE,
+  claveUsuario VARCHAR(255) NOT NULL,
+  tipoUsuario ENUM('pasajero', 'ceo', 'administrador') NOT NULL DEFAULT 'pasajero',
+  codAerolinea INT NULL,
+  correoVerificado TINYINT(1) NOT NULL DEFAULT 0,
+  estadoCEO ENUM('pendiente', 'aprobado', 'rechazado') DEFAULT NULL,
+  tokenVerificacion CHAR(64) DEFAULT NULL UNIQUE,
+  fechaRegistro DATETIME NOT NULL,
+  fechaLimiteVerificacion DATETIME DEFAULT NULL,
+  activo TINYINT(1) NOT NULL DEFAULT 1,
+  FOREIGN KEY (codAerolinea) REFERENCES aerolineas(codAerolinea)
+) ENGINE = InnoDB;
