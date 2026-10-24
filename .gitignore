@@ -1,3 +1,5 @@
 .DS_Store
 .env
 config/local.php
+config/correo.local.php
+probar_correo.php
