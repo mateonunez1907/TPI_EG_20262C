@@ -1,7 +1,9 @@
 <?php
 
-date_default_timezone_set("America/Argentina/Cordoba");
+require_once __DIR__ . "/sesion.php";
+require_once __DIR__ . "/cuentas.php";
 
+$sesionIniciada = isset($_SESSION["codUsuario"]);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,7 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     ViajAR
                 </a>
 
-                <ul class="navbar-nav flex-row flex-wrap gap-3">
+                <ul class="navbar-nav flex-row flex-wrap align-items-center gap-3">
 
                     <li class="nav-item">
                         <a class="nav-link active"
@@ -52,11 +54,48 @@ date_default_timezone_set("America/Argentina/Cordoba");
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="registro.php">
-                            Crear cuenta
-                        </a>
-                    </li>
+                    <?php if ($sesionIniciada): ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="mi_cuenta.php">
+                                Mi cuenta
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+
+                            <form method="post" action="cerrar_sesion.php">
+
+                                <input
+                                    type="hidden"
+                                    name="token"
+                                    value="<?php echo textoSeguro($_SESSION["tokenSesion"]); ?>"
+                                >
+
+                                <button type="submit"
+                                        class="btn btn-outline-light btn-sm">
+                                    Cerrar sesión
+                                </button>
+
+                            </form>
+
+                        </li>
+
+                    <?php else: ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="registro.php">
+                                Crear cuenta
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="iniciar_sesion.php">
+                                Iniciar sesión
+                            </a>
+                        </li>
+
+                    <?php endif; ?>
 
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#sobre-viajar">
@@ -89,11 +128,22 @@ date_default_timezone_set("America/Argentina/Cordoba");
                     Ver vuelos disponibles
                 </a>
 
-                <a href="registro.php" class="btn btn-outline-primary">
-                    Crear cuenta
-                </a>
+                <?php if ($sesionIniciada): ?>
+
+                    <a href="mi_cuenta.php" class="btn btn-outline-primary">
+                        Mi cuenta
+                    </a>
+
+                <?php else: ?>
+
+                    <a href="registro.php" class="btn btn-outline-primary">
+                        Crear cuenta
+                    </a>
+
+                <?php endif; ?>
 
             </div>
+
         </section>
 
         <section id="sobre-viajar"
@@ -127,21 +177,24 @@ date_default_timezone_set("America/Argentina/Cordoba");
 
                 <ul class="list-unstyled">
 
-                    <li>
-                        <a href="index.php">Inicio</a>
-                    </li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="vuelos.php">Vuelos</a></li>
 
-                    <li>
-                        <a href="vuelos.php">Vuelos</a>
-                    </li>
+                    <?php if ($sesionIniciada): ?>
 
-                    <li>
-                        <a href="registro.php">Crear cuenta</a>
-                    </li>
+                        <li><a href="mi_cuenta.php">Mi cuenta</a></li>
 
-                    <li>
-                        <a href="#sobre-viajar">Sobre ViajAR</a>
-                    </li>
+                    <?php else: ?>
+
+                        <li><a href="registro.php">Crear cuenta</a></li>
+
+                        <li>
+                            <a href="iniciar_sesion.php">Iniciar sesión</a>
+                        </li>
+
+                    <?php endif; ?>
+
+                    <li><a href="#sobre-viajar">Sobre ViajAR</a></li>
 
                 </ul>
 
