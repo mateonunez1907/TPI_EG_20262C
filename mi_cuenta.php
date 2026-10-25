@@ -56,22 +56,16 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
 
             <div class="container d-flex flex-wrap gap-3">
 
-                <a class="navbar-brand fw-bold" href="index.php">
-                    ViajAR
-                </a>
+                <a class="navbar-brand fw-bold" href="index.php">ViajAR</a>
 
                 <ul class="navbar-nav flex-row flex-wrap align-items-center gap-3">
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php">
-                            Inicio
-                        </a>
+                        <a class="nav-link text-white" href="index.php">Inicio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="vuelos.php">
-                            Vuelos
-                        </a>
+                        <a class="nav-link text-white" href="vuelos.php">Vuelos</a>
                     </li>
 
                     <li class="nav-item">
@@ -83,7 +77,6 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
                     </li>
 
                     <li class="nav-item">
-
                         <form method="post" action="cerrar_sesion.php">
 
                             <input
@@ -98,7 +91,6 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
                             </button>
 
                         </form>
-
                     </li>
 
                 </ul>
@@ -111,15 +103,10 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
 
         <nav aria-label="Ruta de navegación">
             <ol class="breadcrumb">
-
-                <li class="breadcrumb-item">
-                    <a href="index.php">Inicio</a>
-                </li>
-
+                <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">
                     Mi cuenta
                 </li>
-
             </ol>
         </nav>
 
@@ -130,46 +117,44 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
         </p>
 
         <section class="card my-4" aria-labelledby="titulo-datos">
-
             <div class="card-body">
 
-                <h2 id="titulo-datos" class="h4">
-                    Datos de tu cuenta
-                </h2>
+                <h2 id="titulo-datos" class="h4">Datos de tu cuenta</h2>
 
                 <dl class="row mb-0">
 
                     <dt class="col-sm-4">Nombre y apellido</dt>
-
                     <dd class="col-sm-8">
                         <?php echo textoSeguro($usuario["nombreUsuario"]); ?>
                     </dd>
 
                     <dt class="col-sm-4">Correo electrónico</dt>
-
                     <dd class="col-sm-8">
                         <?php echo textoSeguro($usuario["mailUsuario"]); ?>
                     </dd>
 
                     <dt class="col-sm-4">Tipo de cuenta</dt>
-
                     <dd class="col-sm-8">
                         <?php echo textoSeguro($tipoCuenta); ?>
                     </dd>
 
                     <dt class="col-sm-4">Correo verificado</dt>
-
                     <dd class="col-sm-8">Sí</dd>
 
                 </dl>
 
             </div>
-
         </section>
 
-        <a href="vuelos.php" class="btn btn-primary">
-            Buscar vuelos
-        </a>
+        <?php if ($usuario["tipoUsuario"] === "pasajero"): ?>
+
+            <a href="mis_reservas.php" class="btn btn-primary">
+                Mis reservas
+            </a>
+
+        <?php endif; ?>
+
+        <a href="vuelos.php" class="btn btn-primary">Buscar vuelos</a>
 
         <a href="index.php" class="btn btn-outline-secondary">
             Volver al inicio
@@ -178,7 +163,6 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
     </main>
 
     <footer class="bg-light border-top py-4">
-
         <div class="container">
 
             <nav aria-label="Mapa del sitio">
@@ -196,7 +180,6 @@ $tipoCuenta = $nombresTipos[$usuario["tipoUsuario"]];
             </p>
 
         </div>
-
     </footer>
 
 </body>
