@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | ViajAR</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <a href="#contenido" class="saltar-contenido">
+        Ir al contenido principal
+    </a>
+
+    <div class="container contenedor">
+        <header class="cabecera">
+            <a href="index.html" class="marca" aria-label="ViajAR Inicio">
+                ViajAR<span>.</span>
+            </a>
+
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Vuelos</a>
+                <a href="informacion.html#aerolineas">Aerolíneas</a>
+                <a href="informacion.html#promociones">Promociones</a>
+                <a href="informacion.html#novedades">Novedades</a>
+            </nav>
+
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="iniciar_sesion.html">Ingresar</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <section class="presentacion" aria-labelledby="titulo-principal">
+                <div>
+                    <p class="etiqueta">Elegí tu próximo destino</p>
+
+                    <h1 id="titulo-principal">
+                        Un viaje empieza<br>
+                        con un <em>¿y si vamos?</em>
+                    </h1>
+
+                    <p class="descripcion">
+                        Buscá tu vuelo, compará las opciones y organizá
+                        tu próxima escapada desde un solo lugar.
+                    </p>
+                </div>
+
+                <div class="tarjeta-ruta"
+                     aria-label="Ruta de ejemplo de Rosario a Bariloche">
+                    <p>DESDE ROSARIO</p>
+                    <div class="codigo">ROS</div>
+                    <div class="trayecto">Un nuevo lugar por descubrir.</div>
+                    <div class="codigo">BRC</div>
+                    <p>HACIA BARILOCHE</p>
+                </div>
+            </section>
+
+            <section class="buscador" aria-labelledby="titulo-buscador">
+                <h2 id="titulo-buscador">¿A dónde querés ir?</h2>
+
+                <form action="vuelos.html"
+                      method="get"
+                      class="campos-busqueda">
+
+                    <div class="campo">
+                        <label for="origen">Origen</label>
+                        <select id="origen" name="origen">
+                            <option>Rosario</option>
+                            <option>Buenos Aires</option>
+                            <option>Córdoba</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="destino">Destino</label>
+                        <select id="destino" name="destino">
+                            <option>Bariloche</option>
+                            <option>Mendoza</option>
+                            <option>Salta</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="fecha">Fecha de salida</label>
+                        <input
+                            type="date"
+                            id="fecha"
+                            name="fecha"
+                            value="2026-11-06"
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="pasajeros">Pasajeros</label>
+                        <select id="pasajeros" name="pasajeros">
+                            <option>1</option>
+                            <option selected>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="boton">
+                        Buscar vuelos
+                    </button>
+                </form>
+            </section>
+
+            <section aria-labelledby="titulo-destinos">
+                <div class="cabecera-seccion">
+                    <h2 id="titulo-destinos">Un lugar para cada plan</h2>
+                    <a href="vuelos.html">Explorar vuelos</a>
+                </div>
+
+                <div class="destinos">
+                    <article class="destino">
+                        <div class="codigo">BRC</div>
+                        <h3>Bariloche</h3>
+                        <p>Lagos, montañas y aire del sur.</p>
+                    </article>
+
+                    <article class="destino">
+                        <div class="codigo">MDZ</div>
+                        <h3>Mendoza</h3>
+                        <p>Una pausa al pie de la cordillera.</p>
+                    </article>
+
+                    <article class="destino">
+                        <div class="codigo">SLA</div>
+                        <h3>Salta</h3>
+                        <p>Otro ritmo, otros paisajes.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+
+            <nav class="enlaces-pie"
+                 aria-label="Información y mapa del sitio">
+                <a href="informacion.html#sobre">Sobre ViajAR</a>
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa del sitio</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>
