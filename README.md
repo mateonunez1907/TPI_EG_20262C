@@ -1,109 +1,85 @@
 # ViajAR
 
-Trabajo práctico de Entornos Gráficos.
-Universidad Tecnológica Nacional, Facultad Regional Rosario.
+Plataforma para la consulta de vuelos y la gestión de reservas
+de pasajes aéreos.
 
-Plataforma para consultar vuelos y gestionar reservas de pasajes aéreos.
+Trabajo práctico de la materia Entornos Gráficos.
+Universidad Tecnológica Nacional — Facultad Regional Rosario.
 
-## Tecnologías utilizadas
+**Comisión:** 2K02  
+**Año:** 2026
 
-- PHP con soporte para Argon2id.
-- MySQL.
-- HTML y JavaScript.
+## Integrantes
+
+| Nombre y apellido | Legajo |
+| --- | --- |
+| Cristina Iglesias | 35674 |
+| Mateo Nuñez | 49200 |
+
+## Entrega de regularidad
+
+Esta entrega incluye los bocetos visuales de las páginas principales
+de ViajAR, correspondientes al punto 7 del Seguimiento 2.
+
+El informe del Seguimiento 2 se entrega por separado en formato PDF.
+
+### Cómo visualizar los bocetos
+
+Abrir el archivo bocetos/index.html en un navegador.
+
+Si se utiliza MAMP con el repositorio como carpeta del sitio,
+ingresar a:
+
+http://localhost:8888/bocetos/index.html
+
+Desde el enlace “Mapa y vistas por rol”, ubicado en el pie de página,
+se pueden recorrer las distintas pantallas.
+
+### Diseños incluidos
+
+- Inicio y buscador de vuelos.
+- Resultados de búsqueda.
+- Detalle de un vuelo.
+- Registro de cuenta.
+- Inicio de sesión y recuperación del acceso.
+- Perfil del pasajero.
+- Listado de reservas.
+- Detalle de reserva y pago de ejemplo.
+- Comprobante imprimible.
+- Gestión de vuelos, promociones y reportes del CEO.
+- Administración de aerolíneas, promociones y novedades.
+- Revisión de solicitudes de CEOs.
+- Información pública, ayuda, contacto, privacidad y mapa del sitio.
+
+Las páginas se adaptan a pantallas de computadora y celular.
+
+### Tecnologías de los bocetos
+
+- HTML.
+- CSS.
 - Bootstrap 5.3.8.
-- PHPMailer 7.1.1.
+- JavaScript.
 
-Las pruebas locales utilizan PHP 8.3.30 y MAMP.
+Bootstrap se carga desde internet. Los estilos propios permiten
+recorrer los bocetos aunque no se cargue esa librería.
 
-## Ejecución local
+### Alcance de la entrega
 
-1. Instalar MAMP.
-2. Seleccionar la carpeta del repositorio como Document root.
-3. Iniciar Apache y MySQL.
-4. Abrir phpMyAdmin y ejecutar sql/base_datos.sql.
-5. Copiar config/ejemplo.php como config/local.php.
-6. Completar los datos de conexión con MySQL.
-7. Para cargar ejemplos en una base vacía, ejecutar una sola vez
-   sql/datos_prueba.sql.
-8. Configurar el correo siguiendo el apartado siguiente.
-9. Abrir http://localhost:8888/.
+Los bocetos presentan la propuesta visual y la navegación del sitio.
 
-Los puertos utilizados son 8888 para Apache y 8889 para MySQL.
-Bootstrap se carga mediante internet.
+Se utilizan datos ficticios y estados de ejemplo. Los formularios
+no guardan información, no envían correos ni realizan pagos.
+Los accesos por rol permiten recorrer los diseños.
 
-## Configuración del correo
+La búsqueda muestra resultados prefijados. La reserva VA-0042
+aparece pendiente en el listado y confirmada en el comprobante
+para representar distintos momentos del proceso.
 
-Los correos se envían mediante Gmail y PHPMailer.
+Para probar los formularios, utilizar datos ficticios.
 
-1. Activar la verificación en dos pasos en la cuenta de Google.
-2. Crear una contraseña de aplicación para ViajAR.
-3. Copiar config/correo.ejemplo.php como config/correo.local.php.
-4. Completar el correo y la contraseña de aplicación en la copia.
+## Avances para aprobación directa
 
-Se utiliza smtp.gmail.com, puerto 465 y cifrado SMTPS.
-Las configuraciones locales con claves están excluidas de Git.
-
-Los enlaces de verificación apuntan a http://localhost:8888/.
-Deben abrirse en la computadora que ejecuta MAMP.
-
-## Archivos principales
-
-- index.php: inicio y menú según exista una sesión.
-- vuelos.php: buscador y listado paginado de vuelos.
-- detalle_vuelo.php: detalle y tarifa del vuelo.
-- registro.php: registro de pasajeros.
-- verificar_correo.php: verificación del correo.
-- iniciar_sesion.php: formulario de acceso.
-- cerrar_sesion.php: cierre de sesión mediante un formulario.
-- mi_cuenta.php: consulta de los datos de la cuenta autenticada.
-- sesion.php: configuración y funciones de las sesiones.
-- cuentas.php: funciones compartidas de las cuentas.
-- conexion.php: conexión con MySQL.
-- correo.php: envío de correos.
-- config/ejemplo.php: configuración de conexión de ejemplo.
-- config/correo.ejemplo.php: configuración de correo de ejemplo.
-- sql/base_datos.sql: creación de la base y sus tablas.
-- sql/datos_prueba.sql: datos ficticios para pruebas.
-- librerias/PHPMailer: librería externa para enviar correos.
-
-## Funcionalidades implementadas
-
-- Inicio, navegación y mapa del sitio en el pie de página.
-- Listado de vuelos con información de su aerolínea desde MySQL.
-- Búsqueda por origen, destino, fecha y cantidad de pasajeros.
-- Coincidencias parciales para las ciudades.
-- Validación de filtros en el navegador y en PHP.
-- Conservación de filtros y opción para limpiar la búsqueda.
-- Paginación con dos vuelos por página.
-- Detalle del vuelo y cálculo de la tarifa por cantidad de pasajeros.
-- Comprobación de disponibilidad.
-- Envío de correos mediante Gmail y PHPMailer.
-- Registro de pasajeros con validación de datos.
-- Contraseñas protegidas mediante password_hash y Argon2id.
-- Control de correos duplicados.
-- Verificación del correo con un enlace de un solo uso válido por 24 horas.
-- Cancelación del registro si falla el envío del correo.
-- Inicio y cierre de sesión.
-- Acceso restringido a Mi cuenta.
-- Renovación del identificador de sesión al ingresar.
-- Comprobación de cuenta activa y correo verificado.
-- Comprobación de autorización para las cuentas de CEO.
-- Nueva consulta de permisos cada vez que se accede a Mi cuenta.
-- Menú de inicio con opciones según exista una sesión.
-
-Los vuelos deben estar activos, pertenecer a una aerolínea activa,
-salir después del día actual y tener asientos suficientes.
-
-La cantidad de pasajeros debe ser un entero entre 1 y 10.
-El importe del detalle utiliza la tarifa publicada.
-La aplicación de promociones se incorporará más adelante.
-
-Las cuentas sin verificar vencen a las 24 horas.
-Su limpieza se ejecuta al acceder al registro, verificación o inicio de sesión.
-Las cuentas ya verificadas se conservan.
-
-## Librerías externas
-
-PHPMailer: https://github.com/PHPMailer/PHPMailer
-
-Se conserva su archivo LICENSE dentro de librerias/PHPMailer.
+Se realizaron ciertos avances de programación para la instancia
+de aprobación directa (AD), que se presentarán más adelante.
+Estos avances se conservan en el repositorio y no forman parte
+de la entrega actual de regularidad.
