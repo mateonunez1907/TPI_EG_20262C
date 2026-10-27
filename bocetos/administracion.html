@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="administracion.html" aria-current="page">Aerolíneas</a>
+                <a href="solicitudes.html">Solicitudes de CEOs</a>
+                <a href="administracion.html#promociones">Promociones</a>
+                <a href="administracion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="mi_perfil.html">Mi perfil</a>
+                <a href="index.html">Salir de la vista</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Administración</p>
+
+            <p class="etiqueta">Administración de ViajAR</p>
+            <h1>Aerolíneas</h1>
+            <p>Consultá las aerolíneas registradas y mantené sus datos actualizados.</p>
+
+            <div class="acciones">
+                <a class="boton" href="#crear-aerolinea">Crear aerolínea</a>
+                <a href="solicitudes.html">Solicitudes de CEOs</a>
+            </div>
+
+            <div class="tabla-contenedor" role="region" aria-label="Aerolíneas registradas" tabindex="0">
+                <table>
+                    <caption>Todas las aerolíneas</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Aerolínea</th>
+                            <th scope="col">IATA</th>
+                            <th scope="col">País</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Aerolínea del Sur</td>
+                            <td>AS</td>
+                            <td>Argentina</td>
+                            <td><span class="estado">Activa</span></td>
+                            <td>
+                                <a href="#editar-aerolinea">Ver / modificar</a>
+                                <button class="enlace" type="button" data-mensaje="Boceto: se revisarían los vuelos y las reservas futuras antes de permitir la baja de la aerolínea.">
+                                    Dar de baja
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vuelos del Litoral</td>
+                            <td>VL</td>
+                            <td>Argentina</td>
+                            <td><span class="estado">Activa</span></td>
+                            <td>
+                                <button class="enlace" type="button" data-mensaje="Vuelos del Litoral · IATA VL · Argentina · Estado activo.">
+                                    Ver
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Horizonte Austral</td>
+                            <td>HA</td>
+                            <td>Argentina</td>
+                            <td><span class="estado inactivo">Inactiva</span></td>
+                            <td>
+                                <button class="enlace" type="button" data-mensaje="Horizonte Austral · IATA HA · Argentina · Estado inactivo.">
+                                    Ver
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <details id="crear-aerolinea">
+                <summary>Crear aerolínea</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se comprobaría que el código IATA no esté registrado antes de crear la aerolínea.">
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label for="iata">Código IATA</label>
+                        <input id="iata" minlength="2" maxlength="2" required>
+                    </div>
+                    <div class="campo">
+                        <label for="pais">País</label>
+                        <input id="pais" value="Argentina" required>
+                    </div>
+                    <div class="acciones">
+                        <button class="boton" type="submit">Guardar aerolínea</button>
+                    </div>
+                </form>
+            </details>
+
+            <details id="editar-aerolinea">
+                <summary>Datos de Aerolínea del Sur</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se guardarían los cambios de la aerolínea.">
+                    <div class="campo">
+                        <label for="editar-nombre">Nombre</label>
+                        <input id="editar-nombre" value="Aerolínea del Sur" required>
+                    </div>
+                    <div class="campo">
+                        <label for="editar-iata">Código IATA</label>
+                        <input id="editar-iata" value="AS" readonly>
+                    </div>
+                    <div class="campo">
+                        <label for="editar-pais">País</label>
+                        <input id="editar-pais" value="Argentina" required>
+                    </div>
+                    <div class="acciones">
+                        <button class="boton" type="submit">Guardar cambios</button>
+                    </div>
+                </form>
+            </details>
+
+            <section class="seccion" id="promociones">
+                <h2>Revisión de promociones</h2>
+                <p>Escapada al sur · Aerolínea del Sur · 10 % de descuento.</p>
+                <p><span class="estado pendiente">Pendiente de aprobación</span></p>
+
+                <div class="acciones">
+                    <button class="boton" type="button" data-mensaje="Boceto: se comprobaría que la aerolínea no tenga otra promoción activa antes de aprobar.">
+                        Aprobar promoción
+                    </button>
+                    <button class="boton secundario" type="button" data-mensaje="Boceto: se registraría el rechazo de la propuesta.">
+                        Rechazar
+                    </button>
+                </div>
+            </section>
+
+            <section class="seccion" id="novedades">
+                <h2>Publicar una novedad</h2>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: la novedad validada se publicaría en la sección pública.">
+                    <div class="campo ancho">
+                        <label for="titulo">Título</label>
+                        <input id="titulo" required>
+                    </div>
+                    <div class="campo ancho">
+                        <label for="texto">Contenido</label>
+                        <textarea id="texto" required></textarea>
+                    </div>
+                    <button class="boton" type="submit">Publicar novedad</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

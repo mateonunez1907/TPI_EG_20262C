@@ -1,4 +1,4 @@
-/* Colores y estilos compartidos */
+/* Colores compartidos */
 :root {
     --fondo: #f5f0e6;
     --tinta: #332633;
@@ -17,9 +17,7 @@ body {
     margin: 0;
     background: var(--fondo);
     color: var(--tinta);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+    font: 16px/1.5 Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -27,16 +25,21 @@ a {
     text-underline-offset: 4px;
 }
 
+a:hover {
+    color: var(--terracota);
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
     outline: 3px solid var(--oliva);
     outline-offset: 4px;
 }
 
 .contenedor {
-    width: 100%;
     max-width: 1100px;
     margin: auto;
     padding: 0 28px;
@@ -48,54 +51,51 @@ select:focus-visible {
 }
 
 .saltar-contenido:focus {
-    top: 12px;
-    left: 12px;
+    top: 10px;
+    left: 10px;
     z-index: 10;
     padding: 12px;
     background: var(--papel);
 }
 
-.cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--borde);
-}
-
-.marca {
-    color: var(--tinta);
-    font-family: Georgia, serif;
-    font-size: 32px;
-    text-decoration: none;
-    letter-spacing: -1px;
-}
-
-.marca span {
-    color: var(--terracota);
-}
-
+.cabecera,
+.pie,
 .menu,
 .accesos,
-.enlaces-pie {
+.acciones,
+.cabecera-seccion {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 18px;
 }
 
+.cabecera {
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+.marca {
+    font: 32px Georgia, serif;
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.marca span,
+h1 em {
+    color: var(--terracota);
+}
+
 .menu a {
-    padding: 8px 0;
     font-size: 15px;
+    padding: 8px 0;
     text-decoration: none;
 }
 
 .menu a:hover,
 .menu a[aria-current="page"] {
     text-decoration: underline;
-    text-underline-offset: 7px;
 }
 
 .accesos {
@@ -103,51 +103,73 @@ select:focus-visible {
     gap: 12px;
 }
 
-.presentacion {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    align-items: center;
-    gap: 40px;
-    padding: 42px 0 30px;
+main {
+    padding-bottom: 36px;
 }
 
-.etiqueta {
-    margin: 0 0 14px;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+.demo {
+    margin: 14px 0;
+    color: var(--oliva);
+    font-size: 13px;
+}
+
+.migas {
+    margin: 22px 0;
+    font-size: 14px;
 }
 
 h1,
 h2 {
-    color: var(--tinta);
     font-family: Georgia, serif;
     font-weight: normal;
 }
 
 h1 {
-    margin: 0 0 20px;
-    font-size: 54px;
-    line-height: 1.08;
-    letter-spacing: -1.5px;
-}
-
-h1 em {
-    color: var(--terracota);
+    font-size: 42px;
+    line-height: 1.1;
+    margin: 12px 0 20px;
 }
 
 h2 {
-    margin: 0;
-    font-size: 29px;
+    font-size: 28px;
+    margin: 0 0 18px;
+}
+
+h3 {
+    font-size: 19px;
+    margin: 0 0 12px;
+}
+
+p {
+    margin: 0 0 16px;
+}
+
+.etiqueta {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.presentacion {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 25px 0 30px;
+}
+
+.presentacion h1 {
+    font-size: 54px;
+    letter-spacing: -1.5px;
 }
 
 .descripcion {
-    max-width: 500px;
-    margin: 0;
+    max-width: 510px;
     font-size: 17px;
 }
 
-.tarjeta-ruta {
+.tarjeta-ruta,
+.resumen {
     padding: 26px;
     background: var(--verde-claro);
 }
@@ -158,9 +180,7 @@ h2 {
 }
 
 .codigo {
-    font-family: Georgia, serif;
-    font-size: 48px;
-    line-height: 1.2;
+    font: 48px Georgia, serif;
 }
 
 .trayecto {
@@ -170,24 +190,29 @@ h2 {
     font-size: 13px;
 }
 
-.buscador {
-    margin-bottom: 34px;
+.buscador,
+.panel,
+.comprobante {
+    background: var(--papel);
     padding: 24px;
     border: 1px solid var(--borde);
     border-top: 3px solid var(--tinta);
-    background: var(--papel);
+    margin-bottom: 26px;
 }
 
 .buscador h2 {
-    margin-bottom: 20px;
     font-size: 25px;
 }
 
 .campos-busqueda {
     display: grid;
-    grid-template-columns: 1.2fr 1.2fr 1fr .65fr auto;
+    grid-template-columns: 1fr 1fr 1fr .7fr auto;
     align-items: end;
     gap: 12px;
+}
+
+.campo {
+    min-width: 0;
 }
 
 .campo label {
@@ -197,17 +222,27 @@ h2 {
 }
 
 .campo input,
-.campo select {
+.campo select,
+.campo textarea {
     width: 100%;
     min-width: 0;
-    height: 46px;
+    min-height: 46px;
     padding: 10px;
     border: 1px solid #968b7d;
     border-radius: 2px;
     background: var(--papel);
     color: var(--tinta);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font: inherit;
+}
+
+.campo textarea {
+    min-height: 100px;
+}
+
+.ayuda {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
 }
 
 .boton {
@@ -216,14 +251,13 @@ h2 {
     justify-content: center;
     min-height: 46px;
     padding: 10px 18px;
-    border: 1px solid var(--terracota);
-    border-radius: 2px;
     background: var(--terracota);
     color: var(--papel);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
+    border: 1px solid var(--terracota);
+    border-radius: 2px;
+    font: inherit;
     text-decoration: none;
-    white-space: nowrap;
+    cursor: pointer;
 }
 
 .boton:hover {
@@ -231,22 +265,32 @@ h2 {
     color: var(--papel);
 }
 
+.secundario {
+    background: transparent;
+    border-color: var(--tinta);
+    color: var(--tinta);
+}
+
+.acciones {
+    margin-top: 22px;
+}
+
 .cabecera-seccion {
-    display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 20px;
+    margin: 24px 0 20px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--borde);
 }
 
-.destinos {
+.cabecera-seccion h2 {
+    margin: 0;
+}
+
+.destinos,
+.columnas {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-bottom: 38px;
 }
 
 .destino {
@@ -261,21 +305,204 @@ h2 {
 
 .destino h3 {
     margin: 5px 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
     font-weight: normal;
 }
 
 .destino p {
-    margin: 0;
     font-size: 14px;
 }
 
-.pie {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.dos-columnas {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 18px;
+}
+
+.ancho {
+    grid-column: 1 / -1;
+}
+
+.resumen .boton {
+    width: 100%;
+}
+
+.total {
+    display: block;
+    margin: 16px 0;
+    font: 36px Georgia, serif;
+}
+
+.datos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 22px 0;
+}
+
+.datos dt {
+    font-size: 13px;
+}
+
+.datos dd {
+    margin: 4px 0 0;
+    font-weight: bold;
+}
+
+.vuelo {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    background: var(--papel);
+    border: 1px solid var(--borde);
+    margin-bottom: 18px;
+}
+
+.vuelo > div {
+    padding: 24px;
+    min-width: 0;
+}
+
+.vuelo h2 {
+    font-size: 27px;
+}
+
+.precio {
+    border-left: 1px dashed var(--borde);
+}
+
+.precio strong {
+    display: block;
+    font: 30px Georgia, serif;
+}
+
+.precio .boton {
+    margin-top: 14px;
+}
+
+.estado {
+    display: inline-block;
+    padding: 5px 10px;
+    background: var(--verde-claro);
+    font-size: 13px;
+}
+
+.pendiente {
+    background: #f0dfcc;
+}
+
+.inactivo {
+    background: #e5ded7;
+}
+
+.reserva {
+    padding: 24px 0;
+    border-top: 1px solid var(--borde);
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.paginacion [aria-current] {
+    background: var(--tinta);
+    color: var(--papel);
+    padding: 4px 12px;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+    margin-bottom: 24px;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+    background: var(--papel);
+    font-size: 14px;
+}
+
+caption {
+    caption-side: top;
+    color: var(--tinta);
+}
+
+th,
+td {
+    text-align: left;
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--borde);
+    vertical-align: top;
+}
+
+th {
+    background: #e9e2d7;
+}
+
+td small {
+    display: block;
+    margin-top: 5px;
+}
+
+td a,
+td button {
+    margin: 3px 8px 3px 0;
+}
+
+.enlace {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--tinta);
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+}
+
+.seccion {
+    padding-top: 30px;
+    margin-top: 20px;
+    border-top: 1px solid var(--borde);
+    scroll-margin-top: 20px;
+}
+
+details {
+    margin: 16px 0;
+    padding: 18px;
+    background: var(--papel);
+    border: 1px solid var(--borde);
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+details[open] summary {
+    margin-bottom: 18px;
+}
+
+.respuesta {
+    padding: 14px;
+    border-left: 3px solid var(--oliva);
+    background: #e7ecd9;
+}
+
+.respuesta:empty {
+    display: none;
+}
+
+.pie {
+    justify-content: space-between;
     padding: 24px 0;
     border-top: 1px solid var(--tinta);
     font-size: 13px;
@@ -285,7 +512,17 @@ h2 {
     margin: 0;
 }
 
-/* Adaptación a pantallas medianas */
+.pie nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Pantallas medianas */
 @media (max-width: 900px) {
     .menu {
         order: 3;
@@ -301,42 +538,63 @@ h2 {
     }
 }
 
-/* Adaptación a celulares */
-@media (max-width: 600px) {
+/* Celulares */
+@media (max-width: 650px) {
     .contenedor {
         padding: 0 18px;
     }
 
-    .presentacion {
+    .presentacion,
+    .dos-columnas,
+    .columnas,
+    .destinos,
+    .vuelo {
         grid-template-columns: 1fr;
-        padding-top: 30px;
+    }
+
+    .presentacion h1 {
+        font-size: 39px;
     }
 
     h1 {
-        font-size: 39px;
+        font-size: 35px;
     }
 
     .tarjeta-ruta {
         display: none;
     }
 
-    .campos-busqueda {
+    .campos-busqueda,
+    .formulario,
+    .datos {
         grid-template-columns: 1fr;
     }
 
-    .buscador {
+    .precio {
+        border-left: 0;
+        border-top: 1px dashed var(--borde);
+    }
+
+    .panel,
+    .buscador,
+    .resumen,
+    .comprobante {
         padding: 20px 16px;
     }
 
-    .destinos {
-        grid-template-columns: 1fr;
+    .vuelo > div {
+        padding: 20px 16px;
+    }
+
+    .boton {
+        max-width: 100%;
+        white-space: normal;
     }
 
     .destino {
         display: grid;
-        grid-template-columns: 90px 1fr;
+        grid-template-columns: 85px 1fr;
         column-gap: 12px;
-        align-items: center;
     }
 
     .destino .codigo {
@@ -347,5 +605,25 @@ h2 {
     .destino h3,
     .destino p {
         grid-column: 2;
+    }
+}
+
+/* Impresión del comprobante */
+@media print {
+    .cabecera,
+    .pie,
+    .demo,
+    .acciones,
+    .saltar-contenido {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .comprobante {
+        border: 1px solid black;
     }
 }

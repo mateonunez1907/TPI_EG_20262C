@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Buscar vuelos</a>
+                <a href="mis_reservas.html">Mis reservas</a>
+                <a href="mi_perfil.html" aria-current="page">Mi perfil</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="mi_perfil.html">Mi perfil</a>
+                <a href="index.html">Salir de la vista</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Mi perfil</p>
+
+            <p class="etiqueta">Tu espacio personal</p>
+            <h1>Mi perfil</h1>
+            <p>Actualizá tus datos y tus preferencias de viaje.</p>
+
+            <div class="dos-columnas">
+                <section class="panel">
+                    <h2>Datos personales</h2>
+
+                    <form class="formulario" method="post" data-mensaje="Boceto: los cambios se guardarían después de validarlos. No se modificaron datos.">
+                        <div class="campo ancho">
+                            <label for="nombre">Nombre y apellido</label>
+                            <input id="nombre" value="María López" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="telefono">Teléfono</label>
+                            <input id="telefono" type="tel" value="3415550123">
+                        </div>
+
+                        <div class="campo">
+                            <label for="correo">Correo verificado</label>
+                            <input id="correo" type="email" value="maria@ejemplo.com" readonly>
+                        </div>
+
+                        <div class="campo">
+                            <label for="destino">Destino de interés</label>
+                            <select id="destino">
+                                <option>Bariloche</option>
+                                <option>Mendoza</option>
+                                <option>Salta</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="tipo">Tipo de viaje</label>
+                            <select id="tipo">
+                                <option>Turismo</option>
+                                <option>Trabajo</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+
+                        <button class="boton ancho" type="submit">Guardar cambios</button>
+                    </form>
+                </section>
+
+                <aside class="resumen">
+                    <h2>Tu cuenta</h2>
+                    <p>María López</p>
+
+                    <dl class="datos">
+                        <div><dt>Tipo de cuenta</dt><dd>Pasajero</dd></div>
+                        <div><dt>Correo</dt><dd>Verificado</dd></div>
+                    </dl>
+
+                    <a class="boton" href="mis_reservas.html">Ver mis reservas</a>
+                    <p class="ayuda">
+                        <a href="detalle_vuelo.html">Seguir con el vuelo elegido</a>
+                    </p>
+                </aside>
+            </div>
+
+            <details>
+                <summary>Cambiar contraseña</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se comprobaría la contraseña actual antes de guardar la nueva.">
+                    <div class="campo">
+                        <label for="actual">Contraseña actual</label>
+                        <input id="actual" type="password" autocomplete="current-password" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="nueva">Nueva contraseña</label>
+                        <input id="nueva" type="password" minlength="8" maxlength="64" autocomplete="new-password" required>
+                    </div>
+
+                    <button class="boton" type="submit">Cambiar contraseña</button>
+                </form>
+            </details>
+
+            <details>
+                <summary>Solicitar baja de la cuenta</summary>
+                <p>Antes de continuar se revisarán las reservas y se pedirá confirmación.</p>
+                <button class="boton secundario" type="button" data-mensaje="Boceto: se solicitaría confirmar la baja. La cuenta de ejemplo se conserva.">
+                    Continuar con la baja
+                </button>
+            </details>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

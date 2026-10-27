@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Vuelos</a>
+                <a href="informacion.html#aerolineas">Aerolíneas</a>
+                <a href="informacion.html#promociones">Promociones</a>
+                <a href="informacion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="iniciar_sesion.html" aria-current="page">Ingresar</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Ingresar</p>
+
+            <p class="etiqueta">Qué bueno verte de nuevo</p>
+            <h1>Tu próximo viaje te espera.</h1>
+
+            <div class="dos-columnas">
+                <section class="panel">
+                    <h2>Iniciar sesión</h2>
+
+                    <form class="formulario" method="post" data-destino="mi_perfil.html">
+                        <div class="campo ancho">
+                            <label for="correo">Correo electrónico</label>
+                            <input id="correo" type="email" value="maria@ejemplo.com" autocomplete="username" required>
+                        </div>
+
+                        <div class="campo ancho">
+                            <label for="clave">Contraseña de ejemplo</label>
+                            <input id="clave" type="password" value="Ejemplo123" autocomplete="current-password" required>
+                        </div>
+
+                        <button class="boton ancho" type="submit">
+                            Ingresar a la vista de pasajero
+                        </button>
+                    </form>
+
+                    <p class="ayuda">
+                        Este acceso recorre el boceto y no comprueba credenciales.
+                    </p>
+                    <a href="#recuperar">Olvidé mi contraseña</a>
+                </section>
+
+                <section>
+                    <h2>Cada cuenta, su espacio</h2>
+                    <p>El acceso definitivo dependerá del rol y de los permisos de la cuenta.</p>
+                    <p>Para revisar los diseños de gestión:</p>
+
+                    <div class="acciones">
+                        <a class="boton secundario" href="ceo.html">Vista CEO</a>
+                        <a class="boton secundario" href="administracion.html">
+                            Vista administrador
+                        </a>
+                    </div>
+
+                    <p class="ayuda">
+                        ¿Primera vez? <a href="registro.html">Creá tu cuenta</a>.
+                    </p>
+                </section>
+            </div>
+
+            <section class="seccion" id="recuperar">
+                <h2>Recuperar contraseña</h2>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se mostraría una respuesta para recuperar el acceso. No se envía ningún correo.">
+                    <div class="campo">
+                        <label for="recuperar-correo">Correo de tu cuenta</label>
+                        <input id="recuperar-correo" type="email" required>
+                    </div>
+
+                    <div class="acciones">
+                        <button class="boton" type="submit">Solicitar recuperación</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

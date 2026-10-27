@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del vuelo | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Vuelos</a>
+                <a href="informacion.html#aerolineas">Aerolíneas</a>
+                <a href="informacion.html#promociones">Promociones</a>
+                <a href="informacion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="iniciar_sesion.html">Ingresar</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="vuelos.html">Vuelos</a> / Detalle del vuelo</p>
+
+            <p class="etiqueta">Tu próxima ruta</p>
+            <h1>Rosario → Bariloche</h1>
+            <p>Aerolínea del Sur · Vuelo 101</p>
+
+            <div class="dos-columnas">
+                <section>
+                    <h2>Los datos del viaje</h2>
+
+                    <dl class="datos">
+                        <div>
+                            <dt>Fecha de salida</dt>
+                            <dd>6 de noviembre de 2026</dd>
+                        </div>
+                        <div>
+                            <dt>Horario</dt>
+                            <dd>08:30</dd>
+                        </div>
+                        <div>
+                            <dt>Origen</dt>
+                            <dd>Rosario · ROS</dd>
+                        </div>
+                        <div>
+                            <dt>Destino</dt>
+                            <dd>Bariloche · BRC</dd>
+                        </div>
+                        <div>
+                            <dt>Asientos disponibles</dt>
+                            <dd>12</dd>
+                        </div>
+                        <div>
+                            <dt>Precio por pasajero</dt>
+                            <dd>$ 125.000</dd>
+                        </div>
+                    </dl>
+
+                    <p>Si cambiás de plan, podrás cancelar hasta 72 horas antes de la salida.</p>
+                    <a href="vuelos.html">Volver a los resultados</a>
+                </section>
+
+                <aside class="resumen" aria-label="Resumen del importe">
+                    <h2>Tu viaje, en números</h2>
+                    <p>2 pasajeros × $ 125.000</p>
+                    <strong class="total">$ 250.000</strong>
+
+                    <p>Ingresá a tu cuenta para reservar.</p>
+                    <a class="boton" href="iniciar_sesion.html">Ingresar para reservar</a>
+
+                    <p class="ayuda">
+                        ¿Todavía no tenés cuenta?
+                        <a href="registro.html">Registrate</a>.
+                    </p>
+
+                    <details>
+                        <summary>Ver como pasajero</summary>
+                        <p>Ejemplo del botón disponible después de ingresar.</p>
+                        <a class="boton" href="detalle_reserva.html">
+                            Reservar para 2 pasajeros
+                        </a>
+                    </details>
+                </aside>
+            </div>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

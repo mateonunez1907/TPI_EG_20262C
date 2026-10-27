@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Vuelos</a>
+                <a href="informacion.html#aerolineas">Aerolíneas</a>
+                <a href="informacion.html#promociones">Promociones</a>
+                <a href="informacion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="iniciar_sesion.html">Ingresar</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Información</p>
+
+            <h1>Todo lo que necesitás saber.</h1>
+
+            <nav class="acciones" aria-label="Secciones de información">
+                <a href="#aerolineas">Aerolíneas</a>
+                <a href="#promociones">Promociones</a>
+                <a href="#novedades">Novedades</a>
+                <a href="#mapa">Mapa del sitio</a>
+            </nav>
+
+            <section class="seccion" id="aerolineas">
+                <h2>Aerolíneas que conectan destinos</h2>
+
+                <div class="columnas">
+                    <article>
+                        <p class="etiqueta">IATA AS</p>
+                        <h3>Aerolínea del Sur</h3>
+                        <p>Vuelos nacionales desde Rosario.</p>
+                    </article>
+
+                    <article>
+                        <p class="etiqueta">IATA VL</p>
+                        <h3>Vuelos del Litoral</h3>
+                        <p>Conexiones regionales.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="seccion" id="promociones">
+                <h2>Promociones</h2>
+                <p>
+                    Este es el espacio para las promociones aprobadas
+                    y vigentes de cada aerolínea.
+                </p>
+                <p>Por el momento no hay promociones publicadas en esta demostración.</p>
+                <a href="vuelos.html">Explorar vuelos</a>
+            </section>
+
+            <section class="seccion" id="novedades">
+                <h2>Novedades</h2>
+
+                <article>
+                    <p class="etiqueta">26 de octubre de 2026</p>
+                    <h3>Un nuevo lugar para organizar tus viajes</h3>
+                    <p>
+                        Conocé las pantallas de ViajAR y recorré las opciones
+                        para tu próxima escapada.
+                    </p>
+                </article>
+            </section>
+
+            <section class="seccion" id="sobre">
+                <h2>Sobre ViajAR</h2>
+                <p>
+                    Una propuesta para consultar vuelos y gestionar reservas
+                    desde un mismo sitio.
+                </p>
+                <p>Proyecto académico de Entornos Gráficos · UTN Facultad Regional Rosario.</p>
+            </section>
+
+            <section class="seccion" id="ayuda">
+                <h2>Ayuda para tu próximo viaje</h2>
+
+                <details>
+                    <summary>¿Cómo se realiza una reserva?</summary>
+                    <p>
+                        Buscá un vuelo, revisá el detalle e ingresá a tu cuenta.
+                        Después podrás elegir la cantidad de pasajeros
+                        y revisar el importe.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿Cuántos pasajeros puedo reservar?</summary>
+                    <p>
+                        Entre 1 y 10 pasajeros por reserva,
+                        según los asientos disponibles.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿Hasta cuándo puedo cancelar?</summary>
+                    <p>
+                        Hasta 72 horas antes de la salida.
+                        La fecha límite se mostrará en el detalle de la reserva.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿Por qué tengo que verificar el correo?</summary>
+                    <p>
+                        La verificación permite activar la cuenta.
+                        El enlace vence a las 24 horas.
+                    </p>
+                </details>
+            </section>
+
+            <section class="seccion" id="contacto">
+                <h2>Hablemos de tu viaje</h2>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se mostraría la confirmación de una consulta. No se envía ningún mensaje.">
+                    <div class="campo">
+                        <label for="contacto-nombre">Nombre</label>
+                        <input id="contacto-nombre" required>
+                    </div>
+                    <div class="campo">
+                        <label for="contacto-correo">Correo</label>
+                        <input id="contacto-correo" type="email" required>
+                    </div>
+                    <div class="campo ancho">
+                        <label for="consulta">Consulta</label>
+                        <textarea id="consulta" required></textarea>
+                    </div>
+
+                    <button class="boton" type="submit">Enviar consulta</button>
+                </form>
+            </section>
+
+            <section class="seccion" id="privacidad">
+                <h2>Privacidad</h2>
+                <p>
+                    Este prototipo muestra datos ficticios.
+                    Los formularios no guardan información ni envían mensajes.
+                </p>
+                <p>
+                    Para recorrerlo, utilizá datos de ejemplo.
+                    La política completa se definirá para la implementación del sistema.
+                </p>
+            </section>
+
+            <section class="seccion" id="mapa">
+                <h2>Mapa del sitio y vistas por rol</h2>
+                <p>
+                    Estos accesos permiten revisar los diseños.
+                    No representan permisos de un sistema real.
+                </p>
+
+                <div class="columnas">
+                    <section>
+                        <h3>Visitante</h3>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="vuelos.html">Vuelos</a></li>
+                            <li><a href="detalle_vuelo.html">Detalle del vuelo</a></li>
+                            <li><a href="registro.html">Registro</a></li>
+                            <li>
+                                <a href="iniciar_sesion.html">
+                                    Ingresar y recuperar acceso
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Pasajero</h3>
+                        <ul>
+                            <li><a href="mi_perfil.html">Mi perfil</a></li>
+                            <li><a href="mis_reservas.html">Mis reservas</a></li>
+                            <li><a href="detalle_reserva.html">Reserva y pago</a></li>
+                            <li><a href="comprobante.html">Comprobante</a></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Gestión</h3>
+                        <ul>
+                            <li>
+                                <a href="ceo.html">
+                                    CEO: vuelos, promociones y reportes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="administracion.html">
+                                    Administrador: aerolíneas y publicaciones
+                                </a>
+                            </li>
+                            <li><a href="solicitudes.html">Solicitudes de CEOs</a></li>
+                        </ul>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

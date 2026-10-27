@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión CEO | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="ceo.html" aria-current="page">Mis vuelos</a>
+                <a href="ceo.html#promociones">Mis promociones</a>
+                <a href="ceo.html#reportes">Reportes</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="mi_perfil.html">Mi perfil</a>
+                <a href="index.html">Salir de la vista</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Gestión CEO</p>
+
+            <p class="etiqueta">Gestión de Aerolínea del Sur</p>
+            <h1>Mis vuelos</h1>
+            <p>Administrá los vuelos de tu aerolínea.</p>
+
+            <div class="acciones">
+                <a class="boton" href="#crear-vuelo">Crear vuelo</a>
+                <a href="#promociones">Mis promociones</a>
+                <a href="#reportes">Reportes</a>
+            </div>
+
+            <div class="tabla-contenedor" role="region" aria-label="Vuelos de la aerolínea" tabindex="0">
+                <table>
+                    <caption>Vuelos activos · Aerolínea del Sur</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Vuelo y recorrido</th>
+                            <th scope="col">Salida</th>
+                            <th scope="col">Asientos disponibles / total</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101 · Rosario → Bariloche</td>
+                            <td>6 nov. 2026<br>08:30</td>
+                            <td>12 / 120</td>
+                            <td>$ 125.000</td>
+                            <td>
+                                <a href="detalle_vuelo.html">Ver</a>
+                                <a href="#modificar-vuelo">Modificar</a>
+                                <button class="enlace" type="button" data-mensaje="Boceto: la baja se bloquearía si existen reservas activas con salida futura. Se conserva el historial.">
+                                    Dar de baja
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>105 · Rosario → Mendoza</td>
+                            <td>12 nov. 2026<br>10:15</td>
+                            <td>45 / 120</td>
+                            <td>$ 98.000</td>
+                            <td>
+                                <button class="enlace" type="button" data-mensaje="Vuelo 105: Rosario a Mendoza, salida 12 de noviembre de 2026 a las 10:15. Precio por pasajero: $ 98.000.">
+                                    Ver
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <details id="crear-vuelo">
+                <summary>Crear un vuelo</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se validaría y se guardaría un vuelo de Aerolínea del Sur.">
+                    <div class="campo">
+                        <label for="origen">Origen</label>
+                        <input id="origen" placeholder="Rosario" required>
+                    </div>
+                    <div class="campo">
+                        <label for="destino">Destino</label>
+                        <input id="destino" placeholder="Salta" required>
+                    </div>
+                    <div class="campo">
+                        <label for="salida">Fecha y hora de salida</label>
+                        <input id="salida" type="datetime-local" required>
+                    </div>
+                    <div class="campo">
+                        <label for="capacidad">Capacidad total</label>
+                        <input id="capacidad" type="number" min="1" required>
+                    </div>
+                    <div class="campo">
+                        <label for="precio">Precio por pasajero</label>
+                        <input id="precio" type="number" min="0.01" step="0.01" required>
+                    </div>
+                    <div class="acciones">
+                        <button class="boton" type="submit">Guardar vuelo</button>
+                    </div>
+                </form>
+            </details>
+
+            <details id="modificar-vuelo">
+                <summary>Modificar vuelo 101</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se comprobarían las reservas antes de cambiar capacidad, horario o precio.">
+                    <div class="campo">
+                        <label for="editar-salida">Fecha y hora</label>
+                        <input id="editar-salida" type="datetime-local" value="2026-11-06T08:30" required>
+                    </div>
+                    <div class="campo">
+                        <label for="editar-capacidad">Capacidad total</label>
+                        <input id="editar-capacidad" type="number" value="120" min="108" required>
+                    </div>
+                    <div class="campo">
+                        <label for="editar-precio">Precio por pasajero</label>
+                        <input id="editar-precio" type="number" value="125000" min="0.01" step="0.01" required>
+                    </div>
+                    <div class="acciones">
+                        <button class="boton" type="submit">Guardar cambios</button>
+                    </div>
+                </form>
+
+                <p class="ayuda">En este ejemplo ya hay 108 asientos reservados.</p>
+            </details>
+
+            <section class="seccion" id="promociones">
+                <h2>Mis promociones</h2>
+                <p>
+                    Escapada al sur · 10 % de descuento ·
+                    <span class="estado pendiente">Pendiente de aprobación</span>
+                </p>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se enviaría la propuesta al administrador. Solo podrá existir una promoción activa por aerolínea.">
+                    <div class="campo">
+                        <label for="titulo-promo">Nombre de la promoción</label>
+                        <input id="titulo-promo" required>
+                    </div>
+                    <div class="campo">
+                        <label for="descuento">Descuento (%)</label>
+                        <input id="descuento" type="number" min="1" max="100" required>
+                    </div>
+                    <div class="campo">
+                        <label for="desde">Válida desde</label>
+                        <input id="desde" type="date" required>
+                    </div>
+                    <div class="campo">
+                        <label for="hasta">Válida hasta</label>
+                        <input id="hasta" type="date" required>
+                    </div>
+
+                    <button class="boton" type="submit">Enviar propuesta</button>
+                </form>
+            </section>
+
+            <section class="seccion" id="reportes">
+                <h2>Reporte de reservas</h2>
+                <p>Resumen de ejemplo para noviembre de 2026.</p>
+
+                <dl class="datos">
+                    <div><dt>Reservas</dt><dd>2</dd></div>
+                    <div><dt>Pasajeros reservados</dt><dd>3</dd></div>
+                    <div><dt>Pendientes / confirmadas</dt><dd>1 / 1</dd></div>
+                    <div><dt>Importe confirmado</dt><dd>$ 98.000</dd></div>
+                </dl>
+            </section>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

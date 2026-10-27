@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelos | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html" aria-current="page">Vuelos</a>
+                <a href="informacion.html#aerolineas">Aerolíneas</a>
+                <a href="informacion.html#promociones">Promociones</a>
+                <a href="informacion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="iniciar_sesion.html">Ingresar</a>
+                <a href="registro.html">Registrarse</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="index.html">Inicio</a> / Vuelos</p>
+
+            <p class="etiqueta">Encontrá tu próxima escapada</p>
+            <h1>Rosario → Bariloche</h1>
+            <p>Viernes 6 de noviembre de 2026 · 2 pasajeros.</p>
+
+            <details>
+                <summary>Cambiar búsqueda</summary>
+
+                <form class="formulario" method="post" data-mensaje="Boceto: se mostrarían los vuelos que coincidan con estos filtros. Estos resultados son de ejemplo.">
+                    <div class="campo">
+                        <label for="origen">Origen</label>
+                        <input id="origen" value="Rosario">
+                    </div>
+                    <div class="campo">
+                        <label for="destino">Destino</label>
+                        <input id="destino" value="Bariloche">
+                    </div>
+                    <div class="campo">
+                        <label for="fecha">Fecha</label>
+                        <input id="fecha" type="date" value="2026-11-06" required>
+                    </div>
+                    <div class="campo">
+                        <label for="cantidad">Pasajeros</label>
+                        <input id="cantidad" type="number" min="1" max="10" value="2" required>
+                    </div>
+
+                    <button class="boton" type="submit">Aplicar filtros</button>
+                    <a href="vuelos.html">Limpiar filtros</a>
+                </form>
+            </details>
+
+            <p>2 resultados de ejemplo · Precios en pesos argentinos.</p>
+
+            <article class="vuelo">
+                <div>
+                    <p class="etiqueta">Vuelo 101 · Salida 08:30</p>
+                    <h2>Rosario → Bariloche</h2>
+                    <p>Aerolínea del Sur · IATA AS</p>
+                    <span class="estado">12 asientos disponibles</span>
+                </div>
+
+                <div class="precio">
+                    <strong>$ 125.000</strong>
+                    <p>Por pasajero · Total para 2: $ 250.000</p>
+                    <a class="boton" href="detalle_vuelo.html">Ver detalle</a>
+                </div>
+            </article>
+
+            <article class="vuelo">
+                <div>
+                    <p class="etiqueta">Vuelo 202 · Salida 16:45</p>
+                    <h2>Rosario → Bariloche</h2>
+                    <p>Vuelos del Litoral · IATA VL</p>
+                    <span class="estado">8 asientos disponibles</span>
+                </div>
+
+                <div class="precio">
+                    <strong>$ 139.500</strong>
+                    <p>Por pasajero · Total para 2: $ 279.000</p>
+                    <button class="boton" type="button" data-mensaje="Ejemplo de detalle: vuelo 202, Vuelos del Litoral, salida 16:45. Total para 2 pasajeros: $ 279.000.">
+                        Ver detalle del 202
+                    </button>
+                </div>
+            </article>
+
+            <nav class="paginacion" aria-label="Paginación de vuelos">
+                <span>Anterior</span>
+                <span aria-current="page">1</span>
+                <span>Siguiente</span>
+            </nav>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

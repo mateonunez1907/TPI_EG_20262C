@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitudes de CEOs | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="administracion.html">Aerolíneas</a>
+                <a href="solicitudes.html" aria-current="page">Solicitudes de CEOs</a>
+                <a href="administracion.html#promociones">Promociones</a>
+                <a href="administracion.html#novedades">Novedades</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="mi_perfil.html">Mi perfil</a>
+                <a href="index.html">Salir de la vista</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas">
+                <a href="administracion.html">Administración</a> / Solicitudes de CEOs
+            </p>
+
+            <p class="etiqueta">Administración de ViajAR</p>
+            <h1>Solicitudes de CEOs</h1>
+            <p>Revisá la cuenta y la aerolínea declarada antes de aprobar una solicitud.</p>
+
+            <div class="tabla-contenedor" role="region" aria-label="Solicitudes pendientes" tabindex="0">
+                <table>
+                    <caption>2 solicitudes pendientes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Solicitante</th>
+                            <th scope="col">Aerolínea</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Solicitud</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Laura Pérez<small>laura@ejemplo.com</small></td>
+                            <td>Aerolínea del Sur<small>IATA AS</small></td>
+                            <td>Verificado</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td>
+                                <a href="#solicitud-laura">Ver solicitud</a>
+                                <button class="enlace" type="button" data-mensaje="Boceto: se registraría la aprobación de Laura Pérez como CEO de Aerolínea del Sur.">
+                                    Aprobar
+                                </button>
+                                <button class="enlace" type="button" data-mensaje="Boceto: se solicitaría confirmar el rechazo.">
+                                    Rechazar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Diego Torres<small>diego@ejemplo.com</small></td>
+                            <td>Vuelos del Litoral<small>IATA VL</small></td>
+                            <td>Sin verificar</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td>
+                                <button class="enlace" type="button" data-mensaje="Boceto: el correo de Diego Torres todavía no está verificado. La aprobación no reemplaza esa verificación.">
+                                    Ver solicitud
+                                </button>
+                                <button class="enlace" type="button" data-mensaje="Boceto: se solicitaría confirmar el rechazo.">
+                                    Rechazar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                El CEO necesita el correo verificado y la autorización
+                del administrador para ingresar.
+            </p>
+
+            <details id="solicitud-laura">
+                <summary>Solicitud de Laura Pérez</summary>
+
+                <dl class="datos">
+                    <div><dt>Nombre</dt><dd>Laura Pérez</dd></div>
+                    <div><dt>Correo</dt><dd>laura@ejemplo.com</dd></div>
+                    <div><dt>Aerolínea declarada</dt><dd>Aerolínea del Sur · AS</dd></div>
+                    <div><dt>Estado</dt><dd>Pendiente de aprobación</dd></div>
+                </dl>
+
+                <button class="boton" type="button" data-mensaje="Boceto: se registraría la aprobación de la solicitud.">
+                    Aprobar solicitud
+                </button>
+            </details>
+
+            <a href="administracion.html">Volver a aerolíneas</a>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

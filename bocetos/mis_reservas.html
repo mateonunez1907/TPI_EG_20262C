@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis reservas | ViajAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilos.css">
+    <script src="bocetos.js" defer></script>
+</head>
+<body>
+    <a class="saltar-contenido" href="#contenido">Ir al contenido principal</a>
+
+    <div class="contenedor">
+        <header class="cabecera">
+            <a class="marca" href="index.html">ViajAR<span>.</span></a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="vuelos.html">Buscar vuelos</a>
+                <a href="mis_reservas.html" aria-current="page">Mis reservas</a>
+                <a href="mi_perfil.html">Mi perfil</a>
+            </nav>
+            <nav class="accesos" aria-label="Acceso a la cuenta">
+                <a href="mi_perfil.html">Mi perfil</a>
+                <a href="index.html">Salir de la vista</a>
+            </nav>
+        </header>
+
+        <main id="contenido">
+            <p class="demo">Vista de demostración · Datos ficticios.</p>
+            <p id="aviso" class="respuesta" role="status" tabindex="-1"></p>
+            <p class="migas"><a href="mi_perfil.html">Mi perfil</a> / Mis reservas</p>
+
+            <p class="etiqueta">Tus próximos viajes</p>
+            <h1>Mis reservas</h1>
+            <p>Consultá el estado de tus reservas y los detalles de cada viaje.</p>
+
+            <article class="reserva">
+                <div class="cabecera-seccion">
+                    <h2>Rosario → Bariloche</h2>
+                    <span class="estado pendiente">Pendiente de pago</span>
+                </div>
+
+                <p>VA-0042 · Aerolínea del Sur · Vuelo 101</p>
+                <p>6 de noviembre de 2026, 08:30 · 2 pasajeros</p>
+                <strong class="total">$ 250.000</strong>
+
+                <div class="acciones">
+                    <a class="boton" href="detalle_reserva.html">Ver reserva y pagar</a>
+                    <a href="detalle_reserva.html#cancelacion">Cancelar reserva</a>
+                </div>
+            </article>
+
+            <article class="reserva">
+                <div class="cabecera-seccion">
+                    <h2>Rosario → Mendoza</h2>
+                    <span class="estado">Confirmada</span>
+                </div>
+
+                <p>VA-0031 · Aerolínea del Sur · Vuelo 105</p>
+                <p>12 de noviembre de 2026, 10:15 · 1 pasajero</p>
+                <strong class="total">$ 98.000</strong>
+
+                <button class="boton secundario" type="button" data-mensaje="Ejemplo de reserva confirmada: VA-0031, Rosario a Mendoza, 12 de noviembre de 2026 a las 10:15. Total: $ 98.000.">
+                    Ver reserva VA-0031
+                </button>
+            </article>
+
+            <nav class="paginacion" aria-label="Paginación de reservas">
+                <span>Anterior</span>
+                <span aria-current="page">1</span>
+                <span>Siguiente</span>
+            </nav>
+
+            <a href="vuelos.html">Buscar otro vuelo</a>
+        </main>
+
+        <footer class="pie">
+            <p>ViajAR · Cada viaje, un nuevo comienzo.</p>
+            <nav aria-label="Información del sitio">
+                <a href="informacion.html#ayuda">Ayuda</a>
+                <a href="informacion.html#contacto">Contacto</a>
+                <a href="informacion.html#privacidad">Privacidad</a>
+                <a href="informacion.html#mapa">Mapa y vistas por rol</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>
